@@ -1,11 +1,18 @@
 {
+  "type": "module",
   "name": "youboxd-node-server",
   "version": "1.0.0",
   "description": "youboxd backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+   },  
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "git repository": "https://github.com/davidjoonhuh/youboxd-node-server",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+  
 }
