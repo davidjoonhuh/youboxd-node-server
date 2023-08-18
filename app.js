@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import UserController from "./users/users-controller.js";
 import AuthController from './users/auth-controller.js';
+import VideosController from './videos/videos-controller.js';
+import CommentsController from './comments/comments-controller.js';
 import session from "express-session";
 import "dotenv/config";
 
@@ -35,4 +37,6 @@ if (process.env.NODE_ENV !== "development") {
 app.use(express.json());
 AuthController(app);
 UserController(app);
+CommentsController(app);
+VideosController(app);
 app.listen(process.env.PORT || 4000);
