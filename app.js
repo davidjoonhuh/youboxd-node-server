@@ -6,7 +6,7 @@ import session from "express-session";
 import "dotenv/config";
 import mongoose from "mongoose";
 
-const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb+srv://wdev59842:<password>@cluster0.uh2oh9q.mongodb.net/?retryWrites=true&w=majority'
+const CONNECTION_STRING = 'mongodb+srv://wdev59842:supersecretpassword@cluster0.uh2oh9q.mongodb.net/youboxd?retryWrites=true&w=majority'
 console.log(CONNECTION_STRING)
 mongoose.connect(CONNECTION_STRING);
 
