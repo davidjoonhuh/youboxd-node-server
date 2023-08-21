@@ -8,7 +8,7 @@ export const createVideo = (video) =>
     videosModel.create(video);
 export const updateVideo = (id, video) =>
     videosModel.updateOne({ _id: id }, { $set: video });
-export const deleteUser = (id) =>
+export const deleteVideo = (id) =>
     videosModel.deleteOne({ _id: id });
 
 export const appendLike = (videoId, userId) => 

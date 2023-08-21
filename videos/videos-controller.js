@@ -14,6 +14,24 @@ const VideosController = (app) => {
     app.put('/api/videos/:id', updateVid);
 }
 
+const findVidById = async (req, res) => {
+    const id = req.params.id;
+    const video = await videosDao.findVidById(id);
+    res.json(video);
+}
+
+const findAllVid = async (req, res) => {
+   const videos = await videosDao.findAllVids();
+   res.json(videos)
+}
+
+
+const deleteVid = async (req, res) => {
+    const vidIdToDelete = req.params.tid;
+    const status = await videosDao.deleteVideo(vidIdToDelete);
+    res.json(status);
+}
+
 /*
 This should be called when a video that does not exist within our db
 is liked or commented on for the first time, followed by a call to the 
