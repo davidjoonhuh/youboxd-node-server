@@ -1,4 +1,4 @@
-import commentsModel from "./comments-model";
+import commentsModel from "./comments-model.js";
 
 export const findAllComments = () =>
     commentsModel.find();

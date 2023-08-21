@@ -1,4 +1,4 @@
-import videosModel from "./videos-model";
+import videosModel from "./videos-model.js";
 
 export const findAllVids = () =>
     videosModel.find();
