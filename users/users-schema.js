@@ -13,5 +13,6 @@ const usersSchema = new mongoose.Schema({
   },
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usersModel' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usersModel' }],
+  liked: [String],
 }, { collection: "users" });
 export default usersSchema;

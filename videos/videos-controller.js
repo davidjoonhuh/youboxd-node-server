@@ -7,7 +7,7 @@ simplicity's sake
 */
 
 const VideosController = (app) => {
-    app.get('/api/videos', findAllVid)
+    app.get('/api/videos', findVideos)
     app.get('/api/videos/:id', findVidById);
     app.post('/api/videos', createVid);
     app.delete('/api/videos/:id', deleteVid);
@@ -20,8 +20,8 @@ const findVidById = async (req, res) => {
     res.json(video);
 }
 
-const findAllVid = async (req, res) => {
-   const videos = await videosDao.findAllVids();
+const findVideos = async (req, res) => {
+   const videos = await videosDao.findVideos();
    res.json(videos)
 }
 
