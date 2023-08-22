@@ -27,17 +27,20 @@ const findAllComments = async(req, res) => {
 
 const findCommentById = async(req, res) => {
     const id = req.params.id;
-    const video = await commentsDao.findCommentById(id);
+    const comment = await commentsDao.findCommentById(id);
+    res.json(comment)
 }
 
 const findCommentsByAuthorId = async(req, res) => {
     const id = req.params.id;
-    const comments = await commentsDao.findAllCommentsByVideoId(id);
+    const comments = await commentsDao.findAllCommentsByAuthorId(id);
+    res.json(comments)
 }
 
 const findCommentsByVideoId = async(req, res) => {
     const id = req.params.id;
-    const comments = await commentsDao.findAllCommentsByAuthorId(id);
+    const comments = await commentsDao.findAllCommentsByVideoId(id);
+    res.json(comments)
 }
 
 export default CommentsController;
