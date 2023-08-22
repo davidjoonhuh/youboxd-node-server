@@ -31,17 +31,23 @@ const AuthController = (app) => {
         }
     };
 
-const profile = (req, res) => {
-    console.log("profile")
-    console.log(req.session)
-    console.log("profile")
+ const profile = async (req, res) => {
     const currentUser = req.session["currentUser"];
     if (!currentUser) {
-        res.sendStatus(404);
-        return;
+      console.log("currentUser not found")
+      res.sendStatus(403);
+    } else {
+      const user = await usersDao.findUserById(currentUser._id);
+      if (!user) {
+        console.log("user not found")
+        res.sendStatus(403);
+      } else {
+        req.session["currentUser"] = user;
+        req.session.save();
+        res.json(user);
+      }
     }
-    res.json(currentUser);
-};
+  };
 
 const logout = async (req, res) => {
     req.session.destroy();
@@ -59,9 +65,21 @@ const update = (req, res) => {
     }
 };
 
+    const publicProfile = async (req, res) => {
+    const profileId = req.params.profileId;
+    const publicUser = await usersDao.findUserById(profileId);
+    if (!publicUser) {
+      res.sendStatus(404);
+    } else {
+      const newUser = { ...publicUser, email: "", phone: "" };
+      res.json(newUser);
+    }
+  };
+
 app.post("/api/users/register", register);
 app.post("/api/users/login", login);
 app.post("/api/users/profile", profile);
+app.get("/api/users/profile/:profileId", publicProfile);
 app.post("/api/users/logout", logout);
 app.put("/api/users/update/:uid", update);
 };

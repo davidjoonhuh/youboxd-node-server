@@ -1,6 +1,6 @@
 import videosModel from "./videos-model.js";
 
-export const findAllVids = () =>
+export const findVideos = () =>
     videosModel.find();
 export const findVidById = (id) =>
     videosModel.findById(id);
