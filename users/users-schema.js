@@ -7,6 +7,7 @@ const usersSchema = new mongoose.Schema({
   email: { type: String, default: "None" },
   phone: { type: String, default: "000-000-0000" },
   address: { type: String, default: "None" },
+  color: { type: String, default: "black" },
   role: {
     type: String,
     default: "Viewer",
