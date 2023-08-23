@@ -19,8 +19,8 @@ const AuthController = (app) => {
         if (username && password) {
             const user = await usersDao.findUserByCredentials(username, password);
             if (user) {
-                req.session["currentUser"] = user;
-                res.json(user);
+              req.session["currentUser"] = user;
+              res.json(user);
             } else {
                 console.log("User not found")
                 res.sendStatus(403);
@@ -30,6 +30,23 @@ const AuthController = (app) => {
             res.sendStatus(403);
         }
     };
+
+    const adminProfile = async (req, res) => {
+      const currentUser = req.session["currentUser"];
+      if (!currentUser || currentUser.role !== 'Admin') {  // Check role directly
+          console.log("Not an admin user");
+          res.sendStatus(403);
+      } else {
+          const user = await usersDao.findUserById(currentUser._id);
+          if (user) {
+              res.json(user);
+          } else {
+              console.log("Admin user not found");
+              res.sendStatus(403);
+          }
+      }
+  };
+  
 
  const profile = async (req, res) => {
     const currentUser = req.session["currentUser"];
@@ -54,7 +71,7 @@ const logout = async (req, res) => {
     res.sendStatus(200);
 };
 
-const update = (req, res) => {
+const update = async (req, res) => {
     const userId = req.params['uid'];
     const newUser = usersDao.updateUser(userId, req.body);
     req.session["currentUser"] = usersDao.findUserById(userId);
@@ -82,6 +99,7 @@ app.post("/api/users/profile", profile);
 app.get("/api/users/profile/:profileId", publicProfile);
 app.post("/api/users/logout", logout);
 app.put("/api/users/update/:uid", update);
+app.get("/api/admin/profile", adminProfile);
 };
 export default AuthController;
 

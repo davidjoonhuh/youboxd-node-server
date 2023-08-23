@@ -1,13 +1,28 @@
 import * as usersDao from "./users-dao.js";
 
-const UsersController = (app) => {
-   app.get('/api/users', findAllUsers)
+
+const isAdmin = (req, res, next) => {
+   const currentUser = req.session["currentUser"];
+   if (currentUser && currentUser.role === 'Admin') {
+     next();
+   } else {
+     res.sendStatus(403); // Forbidden
+   }
+};
+
+
+ const UsersController = (app) => {
+   app.get('/api/users', findAllUsers);
    app.get('/api/users/:id', findUserById);
    app.post('/api/users', createUser);
-   app.delete('/api/users/:id', deleteUser);
    app.put('/api/users/:id', updateUser);
    app.put('/api/publicuser', updatePublicUser);
-}
+   
+   // Admin-specific routes
+   app.get('/api/admin/users', isAdmin, findAllUsers);
+   app.delete('/api/admin/users/:id', isAdmin, deleteUser);
+ };
+
  const updatePublicUser = async (req, res) => {
     const updates = req.body;
     await usersDao.updateUser(updates._id, updates);
