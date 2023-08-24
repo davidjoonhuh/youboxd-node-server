@@ -69,34 +69,36 @@ OTHERWISE THIS FUNCTION WILL EXPLODE (jk it'll only fulfill one but don't)
 const updateVid = async (req, res) => {
     const videoId = req.params.id;
     const updateFields = req.body;
+    console.log(updateFields)
 
     if (updateFields.addComment !== undefined &&
         updateFields.addComment !== null &&
         updateFields.addComment !== "") {
         console.log("addComment field not empty")
-        const vid = await videosDao.appendComment(videoId, updateFields.addComment);
-        res.json(vid)
+        const vid1 = await videosDao.appendComment(videoId, updateFields.addComment);
+        res.json(vid1)
     }
     else if (updateFields.deleteComment !== undefined &&
         updateFields.deleteComment !== null &&
         updateFields.deleteComment !== "") {
         console.log("deleteComment field not empty")
-        const vid = videosDao.deleteComment(videoId, updateFields.deleteComment);
-        res.json(vid)
+        const vid2 = await videosDao.deleteComment(videoId, updateFields.deleteComment);
+        res.json(vid2)
     }
     else if (updateFields.addLike !== undefined &&
         updateFields.addLike !== null &&
         updateFields.addLike !== "") {
         console.log("addLike field not empty")
-        const vid = videosDao.appendLike(videoId, updateFields.addLike);
-        res.json(vid)
+        const vid3 = await videosDao.appendLike(videoId, updateFields.addLike);
+        console.log("like appended")
+        res.json(vid3)
     }
     else if (updateFields.removeLike !== undefined &&
         updateFields.removeLike !== null &&
         updateFields.removeLike !== "") {
-        console.log("addComment field not empty")
-        const vid = videosDao.deleteLike(videoId, updateFields.removeLike);
-        res.json(vid)
+        console.log("removeLike field not empty")
+        const vid4 = await videosDao.deleteLike(videoId, updateFields.removeLike);
+        res.json(vid4)
     }
 }
 
