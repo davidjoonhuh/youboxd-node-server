@@ -81,21 +81,21 @@ const updateVid = async (req, res) => {
         updateFields.deleteComment !== null &&
         updateFields.deleteComment !== "") {
         console.log("deleteComment field not empty")
-        const vid = videosDao.deleteComment(videoId, updateFields.deleteComment);
+        const vid = await videosDao.deleteComment(videoId, updateFields.deleteComment);
         res.json(vid)
     }
     else if (updateFields.addLike !== undefined &&
         updateFields.addLike !== null &&
         updateFields.addLike !== "") {
         console.log("addLike field not empty")
-        const vid = videosDao.appendLike(videoId, updateFields.addLike);
+        const vid = await videosDao.appendLike(videoId, updateFields.addLike);
         res.json(vid)
     }
     else if (updateFields.removeLike !== undefined &&
         updateFields.removeLike !== null &&
         updateFields.removeLike !== "") {
         console.log("addComment field not empty")
-        const vid = videosDao.deleteLike(videoId, updateFields.removeLike);
+        const vid = await videosDao.deleteLike(videoId, updateFields.removeLike);
         res.json(vid)
     }
 }
