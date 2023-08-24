@@ -5,14 +5,11 @@ const usersSchema = new mongoose.Schema({
   firstName: { type: String, default: "None" },
   lastName: { type: String, default: "None" },
   email: { type: String, default: "None" },
-  phone: { type: String, default: "000-000-0000" },
-  address: { type: String, default: "None" },
   role: {
     type: String,
-    default: "Viewer",
-  },
-  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usersModel' }],
-  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usersModel' }],
+    default: "User",
+  }, // Other roles: Administrator
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usersModel' }],
   liked: [String],
-}, { collection: "users" });
+}, { collection: "users2" });
 export default usersSchema;

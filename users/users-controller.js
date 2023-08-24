@@ -1,20 +1,12 @@
 import * as usersDao from "./users-dao.js";
 
-const UsersController = (app) => {
+const UserController = (app) => {
    app.get('/api/users', findAllUsers)
    app.get('/api/users/:id', findUserById);
    app.post('/api/users', createUser);
    app.delete('/api/users/:id', deleteUser);
    app.put('/api/users/:id', updateUser);
-   app.put('/api/publicuser', updatePublicUser);
 }
- const updatePublicUser = async (req, res) => {
-    const updates = req.body;
-    await usersDao.updateUser(updates._id, updates);
-    const user = await usersDao.findUserById(updates._id)
-    res.json(user);
-  };
-
 const findAllUsers = async (req, res) => {
    const username = req.query.username;
    const password = req.query.password;
@@ -63,4 +55,4 @@ const updateUser = async (req, res) => {
    res.json(status);
 };
 
-export default UsersController;
+export default UserController
