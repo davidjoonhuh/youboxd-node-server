@@ -93,6 +93,19 @@ const update = async (req, res) => {
     }
   };
 
+  const deleteUser = async (req, res) => {
+    const userId = req.params.id;
+    const deletedUser = await usersDao.deleteUser(userId);
+    
+    if (deletedUser) {
+        req.session.destroy(); // logs user out
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(404);
+    }
+};
+
+app.delete("/api/users/:id", deleteUser);
 app.post("/api/users/register", register);
 app.post("/api/users/login", login);
 app.post("/api/users/profile", profile);
