@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 const usersSchema = new mongoose.Schema({
-
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   firstName: { type: String, default: "None" },
@@ -8,12 +7,12 @@ const usersSchema = new mongoose.Schema({
   email: { type: String, default: "None" },
   phone: { type: String, default: "000-000-0000" },
   address: { type: String, default: "None" },
-  color: { type: String, default: "black" },
-  role: {
+    role: {
     type: String,
     default: "Viewer",
   },
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usersModel' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usersModel' }],
+  liked: [String],
 }, { collection: "users" });
 export default usersSchema;
